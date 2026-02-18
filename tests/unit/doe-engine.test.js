@@ -67,16 +67,18 @@ describe('calculatePenalty', () => {
     expect(calculatePenalty(ALL_LOW, traits)).toBe(0);
   });
 
-  test('bwgt direction is negative — high bwgt INCREASES penalty for crowding-sensitive bot', () => {
-    const traits = { crowding: 1.0, saccadic: 0, contrast: 0 };
-    // Only crowding factors matter: letterSpacing(+1), wordSpacing(+1), bwgt(-1)
-    // All HIGH: -(1*15*1*1) -(1*12*1*1) -(1*14*1*-1) = -15 -12 +14 = -13
-    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
+  test('bwgt direction is negative — high bwgt INCREASES penalty for contrast-sensitive bot', () => {
+    // bwgt remapped from crowding→contrast (feature/bwgt-isolation-test):
+    // isolation test showed bwgt is imperceptible on crowding-dominant bots;
+    // stroke weight is a contrast-axis effect (heavy strokes reduce contrast).
+    const traits = { crowding: 0, saccadic: 0, contrast: 1.0 };
+    // Only contrast factors matter: fontWeight(+1,w=10), fontSize(+1,w=14), bwgt(-1,w=14)
+    // All HIGH: -(1*10*1*1) -(1*14*1*1) -(1*14*1*-1) = -10 -14 +14 = -10
     const penaltyHigh = calculatePenalty(ALL_HIGH, traits);
-    // All LOW: -(-1*15*1*1) -(-1*12*1*1) -(-1*14*1*-1) = +15 +12 -14 = +13
+    // All LOW: -(-1*10*1*1) -(-1*14*1*1) -(-1*14*1*-1) = +10 +14 -14 = +10
     const penaltyLow = calculatePenalty(ALL_LOW, traits);
-    expect(penaltyHigh).toBe(-13);
-    expect(penaltyLow).toBe(13);
+    expect(penaltyHigh).toBe(-10);
+    expect(penaltyLow).toBe(10);
   });
 
   test('only saccadic factors matter when crowding=0 and contrast=0', () => {
@@ -90,10 +92,11 @@ describe('calculatePenalty', () => {
 
   test('only contrast factors matter when crowding=0 and saccadic=0', () => {
     const traits = { crowding: 0, saccadic: 0, contrast: 1.0 };
-    // Contrast factors: fontWeight(+1, w=10), fontSize(+1, w=14)
-    // ALL_HIGH: -(1*10*1*1) -(1*14*1*1) = -24
-    expect(calculatePenalty(ALL_HIGH, traits)).toBe(-24);
-    expect(calculatePenalty(ALL_LOW, traits)).toBe(24);
+    // Contrast factors: fontWeight(+1,w=10), fontSize(+1,w=14), bwgt(-1,w=14)
+    // ALL_HIGH: -(1*10*1*1) -(1*14*1*1) -(1*14*1*-1) = -10 -14 +14 = -10
+    // (bwgt remapped to contrast axis on feature/bwgt-isolation-test branch)
+    expect(calculatePenalty(ALL_HIGH, traits)).toBe(-10);
+    expect(calculatePenalty(ALL_LOW, traits)).toBe(10);
   });
 
   test('missing factor levels default to 0 (no contribution)', () => {
@@ -283,10 +286,11 @@ describe('Full DOE vote pipeline integration', () => {
     const factorLevels = { letterSpacing: 1, wordSpacing: 1, bwgt: -1 }; // all crowding factors at best
     const penalty = calculatePenalty(factorLevels, traits);
     const ref = calculateReferencePenalty();
-    // penalty = -(1*15*1*1) -(1*12*1*1) -(-1*14*1*-1) = -15 -12 -14 = -41
-    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
-    expect(penalty).toBe(-41);
-    // With no noise (attention=1), diff = -41 - 0 = -41 < -3 → Better
+    // bwgt is now contrast axis — contrast=0 so bwgt contributes 0
+    // penalty = -(1*15*1*1) -(1*12*1*1) = -15 -12 = -27
+    // (bwgt remapped crowding→contrast on feature/bwgt-isolation-test branch)
+    expect(penalty).toBe(-27);
+    // With no noise (attention=1), diff = -27 - 0 = -27 < -3 → Better
     const vote = decideVote(penalty, ref, 1.0);
     expect(vote).toBe(1);
   });
@@ -296,9 +300,10 @@ describe('Full DOE vote pipeline integration', () => {
     const factorLevels = { letterSpacing: -1, wordSpacing: -1, bwgt: 1 }; // all crowding factors at worst
     const penalty = calculatePenalty(factorLevels, traits);
     const ref = calculateReferencePenalty();
-    // penalty = -(-1*15*1*1) -(-1*12*1*1) -(1*14*1*-1) = +15 +12 +14 = +41
-    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
-    expect(penalty).toBe(41);
+    // bwgt is now contrast axis — contrast=0 so bwgt contributes 0
+    // penalty = -(-1*15*1*1) -(-1*12*1*1) = +15 +12 = +27
+    // (bwgt remapped crowding→contrast on feature/bwgt-isolation-test branch)
+    expect(penalty).toBe(27);
     const vote = decideVote(penalty, ref, 1.0);
     expect(vote).toBe(-1);
   });

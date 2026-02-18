@@ -38,7 +38,10 @@ const FACTOR_TRAIT_MAP = {
   fontWeight:     { trait: 'contrast',  direction: +1 },
   fontSize:       { trait: 'contrast',  direction: +1 },
   paragraphWidth: { trait: 'saccadic',  direction: +1 },
-  bwgt:           { trait: 'crowding',  direction: -1 },  // High BWGT = MORE visual weight = harder
+  bwgt:           { trait: 'contrast',  direction: -1 },  // High BWGT = heavier strokes = LESS contrast = harder
+                                                           // Remapped from crowding→contrast (feature/bwgt-isolation-test):
+                                                           // isolation test proved bwgt is imperceptible on crowding-dominant
+                                                           // bots; stroke weight is a contrast-axis effect, not crowding.
 };
 
 module.exports = { VOTE_THRESHOLD, PENALTY_WEIGHTS, FACTOR_TRAIT_MAP };
