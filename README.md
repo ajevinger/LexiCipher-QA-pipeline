@@ -20,7 +20,7 @@ LexiCipher presents users with 16 pairwise comparisons between a baseline font (
 | `fontWeight` | 300 | 700 | Contrast |
 | `fontSize` | 0.9em | 1.25em | Contrast |
 | `paragraphWidth` | wide | 40ch narrow | Saccadic |
-| `bwgt` (BWGT axis) | 0 | 100 | Crowding (negative) |
+| `bwgt` (BWGT axis) | 0 | 100 | Contrast (negative) |
 
 After 16 votes, LexiCipher runs a DOE effect analysis. If significant factors are found, it enters a **Bayesian optimization** (Fine-Tune) phase to converge on the optimal settings, then generates a personalized font file.
 
@@ -90,9 +90,25 @@ cd lexicipher-qa-pipeline
 
 # Replay a specific bot with its original traits
 ./run_tests.sh --replay BOT_042
+
+# Run a bwgt isolation test (controlled high-contrast profile, other factors suppressed)
+./run_tests.sh --bwgt-test 10
 ```
 
 > **Windows users:** Run these commands in WSL2 or Git Bash. Docker Desktop must be running first.
+
+### bwgt Isolation Mode
+
+`--bwgt-test [N]` runs N bots (default 10) with a controlled profile designed to isolate the BWGT font axis:
+
+| Trait | Range | Purpose |
+|---|---|---|
+| `V_CROWDING` | 0.01–0.10 | Suppressed — crowding factors won't dominate |
+| `V_SACCADIC` | 0.01–0.10 | Suppressed — saccadic factors won't dominate |
+| `V_CONTRAST` | 0.90–0.99 | High — contrast factors (including bwgt) are detectable |
+| `V_ATTENTION` | 0.95 | Fixed — low noise for clean signal |
+
+Use this mode to verify that bwgt is detectable for contrast-sensitive user profiles, or to test changes to bwgt's penalty weight or trait mapping.
 
 ---
 
@@ -160,7 +176,7 @@ MAX_PARALLEL=8 MAX_RETRIES=2 ./run_tests.sh --parallel 50
 
 ### Penalty Weights
 
-Edit `PENALTY_WEIGHTS` in `bot.js` to adjust how much each factor contributes to reading difficulty:
+Edit `PENALTY_WEIGHTS` in `src/constants.js` to adjust how much each factor contributes to reading difficulty:
 
 ```js
 const PENALTY_WEIGHTS = {
@@ -170,7 +186,7 @@ const PENALTY_WEIGHTS = {
   fontWeight:     10,  // Contrast axis
   fontSize:       14,  // Contrast axis
   paragraphWidth: 16,  // Saccadic axis
-  bwgt:            8,  // Crowding axis (negative direction)
+  bwgt:           14,  // Contrast axis (negative direction — heavy strokes reduce contrast)
 };
 ```
 
