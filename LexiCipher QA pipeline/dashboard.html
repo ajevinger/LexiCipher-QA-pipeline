@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexiCipher Bot Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f0; color: #1a1a2e; padding: 24px; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    .subtitle { color: #666; margin-bottom: 24px; }
+
+    /* Summary Cards */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
+    .stat-card .number { font-size: 36px; font-weight: 700; }
+    .stat-card .label { font-size: 13px; color: #888; margin-top: 4px; }
+    .stat-card.green .number { color: #16a34a; }
+    .stat-card.red .number { color: #dc2626; }
+    .stat-card.blue .number { color: #2563eb; }
+    .stat-card.purple .number { color: #7c3aed; }
+
+    /* Controls */
+    .controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+    .controls select, .controls input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+    .controls input[type="text"] { width: 200px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; font-weight: 600; }
+    .btn-primary { background: #1a1a2e; color: white; }
+    .btn-primary:hover { background: #2a2a4e; }
+    .btn-sm { padding: 4px 10px; font-size: 12px; }
+    .btn-outline { background: transparent; border: 1px solid #ccc; color: #666; }
+    .btn-outline:hover { background: #f0f0f0; }
+
+    /* Table */
+    .table-wrapper { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { background: #f8f8f5; padding: 12px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #e5e5e0; white-space: nowrap; }
+    td { padding: 10px 16px; border-bottom: 1px solid #f0f0ec; }
+    tr:hover td { background: #fafaf8; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .badge-green { background: #dcfce7; color: #16a34a; }
+    .badge-red { background: #fee2e2; color: #dc2626; }
+    .badge-yellow { background: #fef9c3; color: #a16207; }
+    .badge-blue { background: #dbeafe; color: #2563eb; }
+    .badge-gray { background: #f3f4f6; color: #6b7280; }
+
+    /* Trait bar */
+    .trait-bar { display: inline-block; width: 50px; height: 8px; background: #e5e7eb; border-radius: 4px; position: relative; vertical-align: middle; }
+    .trait-bar-fill { height: 100%; border-radius: 4px; background: #3b82f6; }
+
+    /* Launch panel */
+    .launch-panel { background: white; border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .launch-panel h2 { font-size: 18px; margin-bottom: 12px; }
+    .command-box { background: #1a1a2e; color: #a3e635; padding: 12px 16px; border-radius: 8px; font-family: monospace; font-size: 13px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .command-box code { flex: 1; }
+
+    /* No data state */
+    .no-data { text-align: center; padding: 60px; color: #999; }
+    .no-data p { margin: 8px 0; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: #1a1a2e; color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px; opacity: 0; transition: opacity 0.3s; z-index: 1000; }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>🧪 LexiCipher Bot Dashboard</h1>
+  <p class="subtitle">Automated testing pipeline for dyslexia font optimization</p>
+
+  <!-- Summary Stats -->
+  <div class="stats" id="stats"></div>
+
+  <!-- Launch Panel -->
+  <div class="launch-panel">
+    <h2>Launch New Run</h2>
+    <div class="controls">
+      <label>Runs: <input type="number" id="numRuns" value="5" min="1" max="1000" style="width:70px"></label>
+      <button class="btn btn-primary" onclick="generateCommand()">Generate Command</button>
+    </div>
+    <div class="command-box" id="commandBox" style="display:none">
+      <code id="commandText"></code>
+      <button class="btn btn-sm btn-outline" style="color:#a3e635;border-color:#a3e635;margin-left:12px" onclick="copyCommand()">Copy</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="controls">
+    <select id="filterStatus" onchange="renderTable()">
+      <option value="">All Statuses</option>
+      <option value="completed">Completed</option>
+      <option value="failed">Failed</option>
+      <option value="running">Running</option>
+    </select>
+    <select id="filterFineTune" onchange="renderTable()">
+      <option value="">All Fine-Tune</option>
+      <option value="true">Triggered</option>
+      <option value="false">Skipped</option>
+    </select>
+    <select id="filterUserType" onchange="renderTable()">
+      <option value="">All Ages</option>
+      <option value="adult">Adult</option>
+      <option value="teen">Teen</option>
+      <option value="child">Child</option>
+    </select>
+    <input type="text" id="searchBox" placeholder="Search BOT_ID..." oninput="renderTable()">
+  </div>
+
+  <!-- Bot Table -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Bot ID</th>
+          <th>Status</th>
+          <th>User Type</th>
+          <th>Viewport</th>
+          <th>Crowding</th>
+          <th>Saccadic</th>
+          <th>Contrast</th>
+          <th>Attention</th>
+          <th>Fine-Tune</th>
+          <th>Sig. Factors</th>
+          <th title="Next.js build ID — changes with every Vercel deployment">App Version</th>
+          <th title="SHA-256 prefix of DOE design matrix — changes if test structure changes">Matrix Hash</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="botTable"></tbody>
+    </table>
+    <div class="no-data" id="noData">
+      <p>📂 No bot data loaded</p>
+      <p>Run <code>./run_tests.sh 5</code> to generate data, then refresh this page.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Load auto-generated data (created by run_tests.sh) -->
+  <script src="test_reports/dashboard_data.js"></script>
+
+  <script>
+    // Globals — populated by dashboard_data.js or empty defaults
+    let registryData = (typeof REGISTRY_DATA !== 'undefined') ? REGISTRY_DATA : { bots: [], totalRuns: 0 };
+    let summaryData = (typeof SUMMARY_DATA !== 'undefined') ? SUMMARY_DATA : [];
+
+    function renderStats() {
+      const bots = registryData.bots || [];
+      const total = bots.length;
+      const completed = bots.filter(b => b.status === 'completed').length;
+      const failed = bots.filter(b => b.status === 'failed').length;
+      const fineTuneCount = bots.filter(b => b.fineTuneTriggered === true).length;
+      const fineTunePct = total > 0 ? Math.round(fineTuneCount / total * 100) : 0;
+
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card"><div class="number">${total}</div><div class="label">Total Runs</div></div>
+        <div class="stat-card green"><div class="number">${completed}</div><div class="label">Completed</div></div>
+        <div class="stat-card red"><div class="number">${failed}</div><div class="label">Failed</div></div>
+        <div class="stat-card blue"><div class="number">${fineTuneCount}</div><div class="label">Fine-Tune Triggered</div></div>
+        <div class="stat-card purple"><div class="number">${fineTunePct}%</div><div class="label">Fine-Tune Rate</div></div>
+      `;
+    }
+
+    function traitBar(value) {
+      const pct = Math.round(value * 100);
+      const color = pct > 70 ? '#16a34a' : pct > 40 ? '#eab308' : '#dc2626';
+      return `<span class="trait-bar"><span class="trait-bar-fill" style="width:${pct}%;background:${color}"></span></span> ${value.toFixed(2)}`;
+    }
+
+    function renderTable() {
+      const bots = registryData.bots || [];
+      const filterStatus = document.getElementById('filterStatus').value;
+      const filterFT = document.getElementById('filterFineTune').value;
+      const filterUT = document.getElementById('filterUserType').value;
+      const search = document.getElementById('searchBox').value.toUpperCase();
+
+      let filtered = bots.filter(b => {
+        if (filterStatus && b.status !== filterStatus) return false;
+        if (filterFT === 'true' && b.fineTuneTriggered !== true) return false;
+        if (filterFT === 'false' && b.fineTuneTriggered === true) return false;
+        if (filterUT && b.userType !== filterUT) return false;
+        if (search && !b.botId.toUpperCase().includes(search)) return false;
+        return true;
+      });
+
+      // Sort newest first
+      filtered = filtered.reverse();
+
+      const tbody = document.getElementById('botTable');
+      const noData = document.getElementById('noData');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        noData.style.display = 'block';
+        return;
+      }
+
+      noData.style.display = 'none';
+
+      tbody.innerHTML = filtered.map(b => {
+        const t = b.traits || {};
+        const statusBadge = b.status === 'completed' ? 'badge-green'
+                          : b.status === 'failed' ? 'badge-red'
+                          : 'badge-yellow';
+        const ftBadge = b.fineTuneTriggered === true ? '<span class="badge badge-blue">Yes</span>'
+                      : b.fineTuneTriggered === false ? '<span class="badge badge-gray">No</span>'
+                      : '<span class="badge badge-yellow">—</span>';
+        const sigFactors = (b.significantFactors || []).join(', ') || '—';
+
+        // Version fingerprints (populated by generate_dashboard_data() from SQLite)
+        const appVer = b.appVersion
+          ? `<span title="${b.appVersion}" style="font-family:monospace;font-size:11px">${b.appVersion.slice(0, 10)}…</span>`
+          : '<span style="color:#bbb">—</span>';
+        const matrixHash = b.doeMatrixHash
+          ? `<span title="${b.doeMatrixHash}" style="font-family:monospace;font-size:11px">${b.doeMatrixHash.slice(0, 8)}</span>`
+          : '<span style="color:#bbb">—</span>';
+
+        return `<tr>
+          <td><strong>${b.botId}</strong></td>
+          <td><span class="badge ${statusBadge}">${b.status}</span></td>
+          <td>${b.userType || '—'}</td>
+          <td>${b.viewport || '—'}</td>
+          <td>${traitBar(t.crowding || 0)}</td>
+          <td>${traitBar(t.saccadic || 0)}</td>
+          <td>${traitBar(t.contrast || 0)}</td>
+          <td>${traitBar(t.attention || 0)}</td>
+          <td>${ftBadge}</td>
+          <td style="max-width:200px;font-size:12px">${sigFactors}</td>
+          <td>${appVer}</td>
+          <td>${matrixHash}</td>
+          <td><button class="btn btn-sm btn-outline" onclick="replayBot('${b.botId}')">Replay</button></td>
+        </tr>`;
+      }).join('');
+    }
+
+    function generateCommand() {
+      const n = document.getElementById('numRuns').value;
+      const cmd = `./run_tests.sh ${n}`;
+      document.getElementById('commandText').textContent = cmd;
+      document.getElementById('commandBox').style.display = 'flex';
+    }
+
+    function replayBot(botId) {
+      const cmd = `./run_tests.sh --replay ${botId}`;
+      navigator.clipboard.writeText(cmd).then(() => showToast(`Copied: ${cmd}`));
+    }
+
+    function copyCommand() {
+      const cmd = document.getElementById('commandText').textContent;
+      navigator.clipboard.writeText(cmd).then(() => showToast('Command copied!'));
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // Initial render
+    renderStats();
+    renderTable();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+/* LexiCipher.org - Personalized Typography Settings */
+/* Generated: 2026-02-18T08:16:01.392Z */
+
+.dyslexia-optimized {
+  /* Font */
+  font-family: 'LexiCipher', 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  font-weight: 500;
+  font-variation-settings: 'BWGT' 50;
+  
+  /* Spacing */
+  letter-spacing: 0.06em;
+  word-spacing: 0.20em;
+  line-height: 1.6;
+  
+  /* Size */
+  font-size: 115%;
+  
+  /* Layout */
+  max-width: 57ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Apply to all body text */
+body.dyslexia-mode {
+  font-family: 'LexiCipher', 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  font-variation-settings: 'BWGT' 50;
+  letter-spacing: 0.06em;
+  word-spacing: 0.20em;
+  line-height: 1.6;
+}
+
+/* Paragraph containers */
+body.dyslexia-mode p,
+body.dyslexia-mode article,
+body.dyslexia-mode .content {
+  max-width: 57ch;
+}

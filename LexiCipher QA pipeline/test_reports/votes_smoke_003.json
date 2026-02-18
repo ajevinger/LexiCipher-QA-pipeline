@@ -1,0 +1,46 @@
+{
+  "testId": "smoke_003",
+  "botId": "BOT_SMOKE",
+  "traits": {
+    "crowding": 0.9,
+    "saccadic": 0.9,
+    "contrast": 0.7,
+    "attention": 0.95
+  },
+  "userType": "adult",
+  "votes": [
+    {
+      "testNum": 1,
+      "runNumber": 12,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": 1,
+        "lineHeight": -1,
+        "fontWeight": 1,
+        "fontSize": 1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "5px",
+        "wordSpacing": "8px",
+        "lineHeight": "26px",
+        "fontWeight": "700",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": -17.7,
+      "refPenalty": 0,
+      "noise": -0.129,
+      "vote": 1,
+      "voteLabel": "Better"
+    }
+  ],
+  "error": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n  - waiting for getByText('Better') to be visible\n",
+  "fineTuneTriggered": false,
+  "significantFactorCount": 0,
+  "significantFactors": [],
+  "completedAt": null
+}
