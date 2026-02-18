@@ -1,0 +1,486 @@
+{
+  "testId": "smoke_pass_001",
+  "botId": "BOT_SMOKE",
+  "traits": {
+    "crowding": 0.9,
+    "saccadic": 0.9,
+    "contrast": 0.7,
+    "attention": 0.95
+  },
+  "userType": "adult",
+  "gradeLevel": "none",
+  "viewport": "1920x1080",
+  "baselineCSS": {
+    "letterSpacing": "normal",
+    "wordSpacing": "0px",
+    "lineHeight": "20.8px",
+    "fontWeight": "300",
+    "fontSize": "16px",
+    "maxWidth": "none",
+    "fontFamily": "Roboto, Arial, sans-serif",
+    "fontVariationSettings": "normal"
+  },
+  "votes": [
+    {
+      "testNum": 1,
+      "runNumber": 6,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": -1,
+        "lineHeight": 1,
+        "fontWeight": -1,
+        "fontSize": 1,
+        "paragraphWidth": -1,
+        "bwgt": 1
+      },
+      "extractedCSS": {
+        "letterSpacing": "5px",
+        "wordSpacing": "0px",
+        "lineHeight": "40px",
+        "fontWeight": "300",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 100"
+      },
+      "penalty": -0.0999999999999952,
+      "refPenalty": 0,
+      "noise": -0.454,
+      "vote": 0,
+      "voteLabel": "Same"
+    },
+    {
+      "testNum": 2,
+      "runNumber": 1,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": -1,
+        "lineHeight": -1,
+        "fontWeight": -1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "0px",
+        "lineHeight": "18.72px",
+        "fontWeight": "300",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": 64.5,
+      "refPenalty": 0,
+      "noise": -0.003,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 3,
+      "runNumber": 2,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": -1,
+        "lineHeight": -1,
+        "fontWeight": -1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "3.6px",
+        "wordSpacing": "0px",
+        "lineHeight": "18.72px",
+        "fontWeight": "300",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": 37.49999999999999,
+      "refPenalty": 0,
+      "noise": -0.613,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 4,
+      "runNumber": 16,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": 1,
+        "lineHeight": 1,
+        "fontWeight": 1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "3.6px",
+        "wordSpacing": "5.76px",
+        "lineHeight": "28.8px",
+        "fontWeight": "700",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": -30.500000000000004,
+      "refPenalty": 0,
+      "noise": 0.241,
+      "vote": 1,
+      "voteLabel": "Better"
+    },
+    {
+      "testNum": 5,
+      "runNumber": 3,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": 1,
+        "lineHeight": -1,
+        "fontWeight": -1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "5.76px",
+        "lineHeight": "18.72px",
+        "fontWeight": "300",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": 42.89999999999999,
+      "refPenalty": 0,
+      "noise": -0.389,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 6,
+      "runNumber": 5,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": -1,
+        "lineHeight": 1,
+        "fontWeight": -1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "0px",
+        "lineHeight": "28.8px",
+        "fontWeight": "300",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": 32.099999999999994,
+      "refPenalty": 0,
+      "noise": 0.467,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 7,
+      "runNumber": 10,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": -1,
+        "lineHeight": -1,
+        "fontWeight": 1,
+        "fontSize": -1,
+        "paragraphWidth": 1,
+        "bwgt": 1
+      },
+      "extractedCSS": {
+        "letterSpacing": "3.6px",
+        "wordSpacing": "0px",
+        "lineHeight": "18.72px",
+        "fontWeight": "700",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 100"
+      },
+      "penalty": 9.099999999999998,
+      "refPenalty": 0,
+      "noise": 0.054,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 8,
+      "runNumber": 9,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": -1,
+        "lineHeight": -1,
+        "fontWeight": 1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "0px",
+        "lineHeight": "18.72px",
+        "fontWeight": "700",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": 50.49999999999999,
+      "refPenalty": 0,
+      "noise": -0.091,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 9,
+      "runNumber": 11,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": 1,
+        "lineHeight": -1,
+        "fontWeight": 1,
+        "fontSize": -1,
+        "paragraphWidth": 1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "5.76px",
+        "lineHeight": "18.72px",
+        "fontWeight": "700",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": 0.0999999999999952,
+      "refPenalty": 0,
+      "noise": 0.514,
+      "vote": 0,
+      "voteLabel": "Same"
+    },
+    {
+      "testNum": 10,
+      "runNumber": 12,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": 1,
+        "lineHeight": -1,
+        "fontWeight": 1,
+        "fontSize": 1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "5px",
+        "wordSpacing": "8px",
+        "lineHeight": "26px",
+        "fontWeight": "700",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": -17.7,
+      "refPenalty": 0,
+      "noise": -0.006,
+      "vote": 1,
+      "voteLabel": "Better"
+    },
+    {
+      "testNum": 11,
+      "runNumber": 4,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": 1,
+        "lineHeight": -1,
+        "fontWeight": -1,
+        "fontSize": 1,
+        "paragraphWidth": 1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "5px",
+        "wordSpacing": "8px",
+        "lineHeight": "26px",
+        "fontWeight": "300",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": -32.5,
+      "refPenalty": 0,
+      "noise": -0.35,
+      "vote": 1,
+      "voteLabel": "Better"
+    },
+    {
+      "testNum": 12,
+      "runNumber": 7,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": 1,
+        "lineHeight": 1,
+        "fontWeight": -1,
+        "fontSize": 1,
+        "paragraphWidth": -1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "8px",
+        "lineHeight": "40px",
+        "fontWeight": "300",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": -9.099999999999998,
+      "refPenalty": 0,
+      "noise": -0.386,
+      "vote": 1,
+      "voteLabel": "Better"
+    },
+    {
+      "testNum": 13,
+      "runNumber": 15,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": 1,
+        "lineHeight": 1,
+        "fontWeight": 1,
+        "fontSize": 1,
+        "paragraphWidth": 1,
+        "bwgt": 1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "8px",
+        "lineHeight": "40px",
+        "fontWeight": "700",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 100"
+      },
+      "penalty": -37.49999999999999,
+      "refPenalty": 0,
+      "noise": -0.246,
+      "vote": 1,
+      "voteLabel": "Better"
+    },
+    {
+      "testNum": 14,
+      "runNumber": 8,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": 1,
+        "lineHeight": 1,
+        "fontWeight": -1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": 1
+      },
+      "extractedCSS": {
+        "letterSpacing": "3.6px",
+        "wordSpacing": "5.76px",
+        "lineHeight": "28.8px",
+        "fontWeight": "300",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 100"
+      },
+      "penalty": -2.1000000000000023,
+      "refPenalty": 0,
+      "noise": -0.636,
+      "vote": 0,
+      "voteLabel": "Same"
+    },
+    {
+      "testNum": 15,
+      "runNumber": 13,
+      "factorLevels": {
+        "letterSpacing": -1,
+        "wordSpacing": -1,
+        "lineHeight": 1,
+        "fontWeight": 1,
+        "fontSize": -1,
+        "paragraphWidth": -1,
+        "bwgt": 1
+      },
+      "extractedCSS": {
+        "letterSpacing": "normal",
+        "wordSpacing": "0px",
+        "lineHeight": "28.8px",
+        "fontWeight": "700",
+        "fontSize": "14.4px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 100"
+      },
+      "penalty": 32.5,
+      "refPenalty": 0,
+      "noise": -0.065,
+      "vote": -1,
+      "voteLabel": "Worse"
+    },
+    {
+      "testNum": 16,
+      "runNumber": 14,
+      "factorLevels": {
+        "letterSpacing": 1,
+        "wordSpacing": -1,
+        "lineHeight": 1,
+        "fontWeight": 1,
+        "fontSize": 1,
+        "paragraphWidth": 1,
+        "bwgt": -1
+      },
+      "extractedCSS": {
+        "letterSpacing": "5px",
+        "wordSpacing": "0px",
+        "lineHeight": "40px",
+        "fontWeight": "700",
+        "fontSize": "20px",
+        "maxWidth": "none",
+        "fontFamily": "LexiCipher, OpenDyslexic, \"Comic Sans MS\", sans-serif",
+        "fontVariationSettings": "\"BWGT\" 0"
+      },
+      "penalty": -57.3,
+      "refPenalty": 0,
+      "noise": 0.393,
+      "vote": 1,
+      "voteLabel": "Better"
+    }
+  ],
+  "fineTuneTriggered": true,
+  "significantFactorCount": 2,
+  "significantFactors": [
+    "wordSpacing",
+    "fontSize"
+  ],
+  "optimizationRounds": 10,
+  "downloadedFiles": [
+    "lexicipher-settings.css",
+    "OpenDyslexic-Personalized.otf",
+    "lexicipher-settings.json"
+  ],
+  "completedAt": "2026-02-18T08:16:09.557Z"
+}

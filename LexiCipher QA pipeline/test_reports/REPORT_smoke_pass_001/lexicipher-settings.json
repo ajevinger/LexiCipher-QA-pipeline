@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "generator": "lexicipher.org",
+  "timestamp": "2026-02-18T08:16:00.763Z",
+  "settings": {
+    "letterSpacing": "0.125em",
+    "wordSpacing": "0.00em",
+    "lineHeight": 1.65,
+    "fontWeight": 500,
+    "maxWidth": "60ch",
+    "bwgt": 50,
+    "fontVariationSettings": "'BWGT' 50"
+  }
+}
