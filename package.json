@@ -5,10 +5,18 @@
   "description": "Deterministic automated testing pipeline for LexiCipher.org dyslexia font optimization",
   "main": "bot.js",
   "scripts": {
-    "test": "node bot.js",
-    "test:local": "node bot.js"
+    "bot": "node bot.js",
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:e2e": "playwright test",
+    "test:all": "jest && playwright test"
   },
   "dependencies": {
     "playwright": "1.52.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "jest": "^29.7.0"
   }
 }

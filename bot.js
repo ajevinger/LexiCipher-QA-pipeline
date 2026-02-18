@@ -17,7 +17,14 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
+const {
+  calculatePenalty,
+  calculateReferencePenalty,
+  decideVote,
+  hashDoeMatrix,
+  gaussianRandom,
+} = require('./src/doe-engine');
+const { VOTE_THRESHOLD, PENALTY_WEIGHTS, FACTOR_TRAIT_MAP } = require('./src/constants');
 
 // ============================================================
 // ENVIRONMENT VARIABLES
@@ -37,127 +44,12 @@ const V_ATTENTION  = parseFloat(process.env.V_ATTENTION || '0.5');
 const SITE_URL     = process.env.SITE_URL || 'https://lexi-cipher-org-cyan.vercel.app/';
 const DOWNLOAD_DIR = process.env.DOWNLOAD_DIR || '/app/downloads';
 
-// ============================================================
-// TUNABLE CONSTANTS
-// ============================================================
-
-// Voting threshold: penalty difference must exceed this to vote non-neutral.
-// Lower = more non-neutral votes = more likely to trigger significance.
-const VOTE_THRESHOLD = 3.0;
-
-// Penalty weights per factor — how much each factor contributes to reading difficulty.
-// These are multiplied by the bot's trait value (0-1) and the factor's coded level (-1/+1).
-const PENALTY_WEIGHTS = {
-  letterSpacing:  15,  // Crowding axis — wider spacing helps crowding-sensitive readers
-  wordSpacing:    12,  // Crowding axis
-  lineHeight:     18,  // Saccadic axis — taller line height helps saccadic difficulty
-  fontWeight:     10,  // Contrast axis — heavier weight helps contrast-sensitive readers
-  fontSize:       14,  // Contrast axis — larger size helps
-  paragraphWidth: 16,  // Saccadic axis — narrower (40ch at +1) helps saccadic
-  bwgt:            8,  // Crowding axis (negative direction — high BWGT = harder)
-};
-
-// Which cognitive trait governs each factor, and whether high factor level helps (+1) or hurts (-1)
-const FACTOR_TRAIT_MAP = {
-  letterSpacing:  { trait: 'crowding',  direction: +1 },  // High (+25%) = easier for crowding-sensitive
-  wordSpacing:    { trait: 'crowding',  direction: +1 },  // High (+40%) = easier
-  lineHeight:     { trait: 'saccadic',  direction: +1 },  // High (2.0) = easier for saccadic
-  fontWeight:     { trait: 'contrast',  direction: +1 },  // High (700) = easier for contrast-sensitive
-  fontSize:       { trait: 'contrast',  direction: +1 },  // High (1.25em) = easier
-  paragraphWidth: { trait: 'saccadic',  direction: +1 },  // High (40ch narrower) = easier for saccadic
-  bwgt:           { trait: 'crowding',  direction: -1 },  // High (100) = MORE visual weight = harder
-};
-
 // Map trait names to env var values
 const TRAITS = {
   crowding:  V_CROWDING,
   saccadic:  V_SACCADIC,
   contrast:  V_CONTRAST,
 };
-
-// ============================================================
-// MATH ENGINE — No AI, purely deterministic + stochastic noise
-// ============================================================
-
-/**
- * Box-Muller transform for Gaussian random number generation.
- * Returns a normally distributed value with given mean and stdDev.
- */
-function gaussianRandom(mean = 0, stdDev = 1) {
-  let u1 = Math.random();
-  let u2 = Math.random();
-  while (u1 === 0) u1 = Math.random(); // Avoid log(0)
-  const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
-  return z0 * stdDev + mean;
-}
-
-/**
- * Calculate how "difficult" a text sample is for this bot's cognitive profile.
- *
- * Uses the coded factor levels (-1/+1) from the DOE design matrix, NOT raw CSS.
- * This aligns exactly with how LexiCipher calculates effects:
- *   effect = 2 * Σ(level × rating) / n
- *
- * The penalty is a weighted sum:
- *   penalty = Σ (factorLevel × weight × traitValue × direction)
- *
- * A LOWER penalty means the sample is EASIER to read for this bot.
- *
- * @param {Object} factorLevels - { letterSpacing: -1|1, wordSpacing: -1|1, ... }
- * @param {Object} traits - { crowding: 0-1, saccadic: 0-1, contrast: 0-1 }
- * @returns {number} - Penalty score (lower = easier to read)
- */
-function calculatePenalty(factorLevels, traits) {
-  let penalty = 0;
-
-  for (const [factor, config] of Object.entries(FACTOR_TRAIT_MAP)) {
-    const level = factorLevels[factor] || 0;        // -1 or +1
-    const weight = PENALTY_WEIGHTS[factor] || 0;
-    const traitValue = traits[config.trait] || 0;    // 0.0 to 1.0
-    const direction = config.direction;              // +1 or -1
-
-    // When direction is +1 and level is +1 (high), this REDUCES penalty
-    // for trait-sensitive bots (traitValue > 0).
-    // Formula: high level + positive direction = negative contribution to penalty
-    penalty -= level * weight * traitValue * direction;
-  }
-
-  return penalty;
-}
-
-/**
- * Calculate the reference (baseline) penalty.
- * Baseline has all factors at their "neutral" settings which is effectively
- * the low level for base factors. Since baseline CSS is fixed (not from the
- * design matrix), we use a standard reference penalty of 0.
- *
- * The actual penalty difference comes from the test sample having factors
- * at high (+1) or low (-1) levels.
- */
-function calculateReferencePenalty() {
-  // Baseline is fixed neutral CSS — we define it as penalty = 0.
-  // All voting is relative to this baseline.
-  return 0;
-}
-
-/**
- * Decide the vote: -1 (Worse), 0 (Same), or +1 (Better).
- *
- * If the test sample has LOWER penalty than reference (easier to read),
- * the bot votes "Better" (+1).
- *
- * Gaussian noise simulates human inconsistency — controlled by V_ATTENTION.
- */
-function decideVote(testPenalty, referencePenalty) {
-  const stdDev = (1.0 - V_ATTENTION) * 10;
-  const noise = gaussianRandom(0, stdDev);
-
-  const diff = testPenalty - referencePenalty + noise;
-
-  if (diff < -VOTE_THRESHOLD) return 1;   // Test is easier → "Better"
-  if (diff > VOTE_THRESHOLD) return -1;    // Test is harder → "Worse"
-  return 0;                                 // No meaningful difference → "Same"
-}
 
 // ============================================================
 // VERSION CAPTURE — Fingerprint the LexiCipher deployment
@@ -221,17 +113,6 @@ async function extractAppVersion(page) {
 
     return null;
   });
-}
-
-/**
- * Compute a short SHA-256 hash of the DOE design matrix.
- * Returns the first 12 hex characters — enough to detect any structural change.
- * If the matrix changes (different factors, levels, or run count), the hash changes.
- */
-function hashDoeMatrix(doeMatrix) {
-  if (!doeMatrix) return null;
-  const canonical = JSON.stringify(doeMatrix, Object.keys(doeMatrix[0] || {}).sort());
-  return crypto.createHash('sha256').update(canonical).digest('hex').slice(0, 12);
 }
 
 // ============================================================
