@@ -260,6 +260,18 @@ lexicipher-qa-pipeline/
 
 ---
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Branch naming conventions (`feature/`, `fix/`, `chore/`, `regression-*`)
+- Required tests before merging
+- Commit message format (Conventional Commits)
+- GitHub branch protection setup for `main`
+
+**Short version:** branch off `main` → make changes → run `npm test` → open a PR → merge.
+
+---
+
 ## License
 
 MIT

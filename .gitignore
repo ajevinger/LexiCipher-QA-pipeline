@@ -7,6 +7,10 @@ test_reports/
 .env
 package-lock.json
 
+# SQLite WAL-mode temp files — never commit these
+*.db-shm
+*.db-wal
+
 # bot_data.db is intentionally tracked (single-file SQLite backup)
 # To exclude it, uncomment the line below:
 # bot_data.db

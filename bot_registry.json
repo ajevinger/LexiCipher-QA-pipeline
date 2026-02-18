@@ -1,0 +1,1220 @@
+{
+  "bots": [
+    {
+      "botId": "BOT_001",
+      "testId": "20260218_113149_001",
+      "createdAt": "2026-02-18T19:31:49.196725Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_002",
+      "testId": "20260218_113149_002",
+      "createdAt": "2026-02-18T19:31:49.330962Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "child",
+      "gradeLevel": "3",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "wordSpacing"
+      ]
+    },
+    {
+      "botId": "BOT_003",
+      "testId": "20260218_113149_003",
+      "createdAt": "2026-02-18T19:31:49.448384Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "child",
+      "gradeLevel": "5",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_004",
+      "testId": "20260218_113149_004",
+      "createdAt": "2026-02-18T19:31:49.578811Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "teen",
+      "gradeLevel": "9",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_005",
+      "testId": "20260218_113149_005",
+      "createdAt": "2026-02-18T19:31:49.690701Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "child",
+      "gradeLevel": "6",
+      "viewport": "1920x1080",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_006",
+      "testId": "20260218_113149_006",
+      "createdAt": "2026-02-18T19:31:49.807378Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "teen",
+      "gradeLevel": "9",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 3,
+      "significantFactors": [
+        "letterSpacing",
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_007",
+      "testId": "20260218_113149_007",
+      "createdAt": "2026-02-18T19:31:49.922767Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "child",
+      "gradeLevel": "4",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 3,
+      "significantFactors": [
+        "letterSpacing",
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_008",
+      "testId": "20260218_113149_008",
+      "createdAt": "2026-02-18T19:31:50.038768Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "teen",
+      "gradeLevel": "7",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_009",
+      "testId": "20260218_113150_009",
+      "createdAt": "2026-02-18T19:31:50.210133Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "teen",
+      "gradeLevel": "9",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "letterSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_010",
+      "testId": "20260218_113150_010",
+      "createdAt": "2026-02-18T19:31:50.329669Z",
+      "traits": {
+        "crowding": 0.86,
+        "saccadic": 0.24,
+        "contrast": 0.24,
+        "attention": 0.66
+      },
+      "userType": "child",
+      "gradeLevel": "5",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_011",
+      "testId": "20260218_121016_001",
+      "createdAt": "2026-02-18T20:10:16.840326Z",
+      "traits": {
+        "crowding": 0.23,
+        "saccadic": 0.42,
+        "contrast": 0.92,
+        "attention": 0.73
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_012",
+      "testId": "20260218_121016_002",
+      "createdAt": "2026-02-18T20:10:16.990681Z",
+      "traits": {
+        "crowding": 0.28,
+        "saccadic": 0.33,
+        "contrast": 0.03,
+        "attention": 0.2
+      },
+      "userType": "child",
+      "gradeLevel": "6",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": false,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_013",
+      "testId": "20260218_121017_003",
+      "createdAt": "2026-02-18T20:10:17.173702Z",
+      "traits": {
+        "crowding": 0.68,
+        "saccadic": 0.3,
+        "contrast": 0.44,
+        "attention": 0.53
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_014",
+      "testId": "20260218_121017_004",
+      "createdAt": "2026-02-18T20:10:17.325087Z",
+      "traits": {
+        "crowding": 0.73,
+        "saccadic": 0.06,
+        "contrast": 0.36,
+        "attention": 0.09
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "wordSpacing"
+      ]
+    },
+    {
+      "botId": "BOT_015",
+      "testId": "20260218_121017_005",
+      "createdAt": "2026-02-18T20:10:17.513633Z",
+      "traits": {
+        "crowding": 0.94,
+        "saccadic": 0.28,
+        "contrast": 0.1,
+        "attention": 0.38
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "letterSpacing",
+        "wordSpacing"
+      ]
+    },
+    {
+      "botId": "BOT_016",
+      "testId": "20260218_121017_006",
+      "createdAt": "2026-02-18T20:10:17.692081Z",
+      "traits": {
+        "crowding": 0.45,
+        "saccadic": 0.56,
+        "contrast": 0.94,
+        "attention": 0.98
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_017",
+      "testId": "20260218_121017_007",
+      "createdAt": "2026-02-18T20:10:17.843438Z",
+      "traits": {
+        "crowding": 0.03,
+        "saccadic": 0.08,
+        "contrast": 0.66,
+        "attention": 0.79
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_018",
+      "testId": "20260218_121017_008",
+      "createdAt": "2026-02-18T20:10:18.003765Z",
+      "traits": {
+        "crowding": 0.79,
+        "saccadic": 0.61,
+        "contrast": 0.59,
+        "attention": 0.61
+      },
+      "userType": "teen",
+      "gradeLevel": "7",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_019",
+      "testId": "20260218_121018_009",
+      "createdAt": "2026-02-18T20:10:18.161431Z",
+      "traits": {
+        "crowding": 0.49,
+        "saccadic": 0.63,
+        "contrast": 0.88,
+        "attention": 0.19
+      },
+      "userType": "child",
+      "gradeLevel": "3",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_020",
+      "testId": "20260218_121018_010",
+      "createdAt": "2026-02-18T20:10:18.308177Z",
+      "traits": {
+        "crowding": 0.57,
+        "saccadic": 0.27,
+        "contrast": 0.85,
+        "attention": 0.88
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_021",
+      "testId": "20260218_121018_011",
+      "createdAt": "2026-02-18T20:10:18.458314Z",
+      "traits": {
+        "crowding": 0.58,
+        "saccadic": 0.83,
+        "contrast": 0.99,
+        "attention": 0.37
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_022",
+      "testId": "20260218_121018_012",
+      "createdAt": "2026-02-18T20:10:18.613849Z",
+      "traits": {
+        "crowding": 0.26,
+        "saccadic": 0.4,
+        "contrast": 0.66,
+        "attention": 0.68
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_023",
+      "testId": "20260218_121018_013",
+      "createdAt": "2026-02-18T20:10:18.828143Z",
+      "traits": {
+        "crowding": 0.84,
+        "saccadic": 0.41,
+        "contrast": 0.31,
+        "attention": 0.64
+      },
+      "userType": "child",
+      "gradeLevel": "5",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_024",
+      "testId": "20260218_121018_014",
+      "createdAt": "2026-02-18T20:10:18.989628Z",
+      "traits": {
+        "crowding": 0.93,
+        "saccadic": 0.55,
+        "contrast": 0.01,
+        "attention": 0.71
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_025",
+      "testId": "20260218_121019_015",
+      "createdAt": "2026-02-18T20:10:19.147501Z",
+      "traits": {
+        "crowding": 0.66,
+        "saccadic": 0.51,
+        "contrast": 0.24,
+        "attention": 0.14
+      },
+      "userType": "child",
+      "gradeLevel": "6",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 3,
+      "significantFactors": [
+        "letterSpacing",
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_026",
+      "testId": "20260218_121019_016",
+      "createdAt": "2026-02-18T20:10:19.294085Z",
+      "traits": {
+        "crowding": 0.24,
+        "saccadic": 0.7,
+        "contrast": 0.41,
+        "attention": 0.29
+      },
+      "userType": "child",
+      "gradeLevel": "3",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "lineHeight",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_027",
+      "testId": "20260218_121019_017",
+      "createdAt": "2026-02-18T20:10:19.446988Z",
+      "traits": {
+        "crowding": 0.29,
+        "saccadic": 0.59,
+        "contrast": 0.21,
+        "attention": 0.05
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": false,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_028",
+      "testId": "20260218_121019_018",
+      "createdAt": "2026-02-18T20:10:19.587000Z",
+      "traits": {
+        "crowding": 0.71,
+        "saccadic": 0.1,
+        "contrast": 0.45,
+        "attention": 0.09
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_029",
+      "testId": "20260218_121019_019",
+      "createdAt": "2026-02-18T20:10:19.756831Z",
+      "traits": {
+        "crowding": 0.98,
+        "saccadic": 0.43,
+        "contrast": 0.34,
+        "attention": 0.56
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_030",
+      "testId": "20260218_121019_020",
+      "createdAt": "2026-02-18T20:10:19.938904Z",
+      "traits": {
+        "crowding": 0.23,
+        "saccadic": 0.78,
+        "contrast": 0.57,
+        "attention": 0.72
+      },
+      "userType": "child",
+      "gradeLevel": "4",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_031",
+      "testId": "20260218_121019_021",
+      "createdAt": "2026-02-18T20:10:20.120880Z",
+      "traits": {
+        "crowding": 0.82,
+        "saccadic": 0.27,
+        "contrast": 0.49,
+        "attention": 0.66
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 3,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_032",
+      "testId": "20260218_121020_022",
+      "createdAt": "2026-02-18T20:10:20.274000Z",
+      "traits": {
+        "crowding": 0.42,
+        "saccadic": 0.54,
+        "contrast": 0.23,
+        "attention": 0.73
+      },
+      "userType": "teen",
+      "gradeLevel": "7",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "fontSize",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_033",
+      "testId": "20260218_121020_023",
+      "createdAt": "2026-02-18T20:10:20.422421Z",
+      "traits": {
+        "crowding": 0.98,
+        "saccadic": 0.35,
+        "contrast": 0.95,
+        "attention": 0.47
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 3,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_034",
+      "testId": "20260218_121020_024",
+      "createdAt": "2026-02-18T20:10:20.575926Z",
+      "traits": {
+        "crowding": 0.55,
+        "saccadic": 0.25,
+        "contrast": 0.53,
+        "attention": 0.71
+      },
+      "userType": "teen",
+      "gradeLevel": "7",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_035",
+      "testId": "20260218_121020_025",
+      "createdAt": "2026-02-18T20:10:20.719347Z",
+      "traits": {
+        "crowding": 0.03,
+        "saccadic": 0.35,
+        "contrast": 0.68,
+        "attention": 0.36
+      },
+      "userType": "child",
+      "gradeLevel": "4",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "fontSize",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_036",
+      "testId": "20260218_121020_026",
+      "createdAt": "2026-02-18T20:10:20.862007Z",
+      "traits": {
+        "crowding": 0.04,
+        "saccadic": 0.96,
+        "contrast": 0.77,
+        "attention": 0.27
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_037",
+      "testId": "20260218_121020_027",
+      "createdAt": "2026-02-18T20:10:21.001255Z",
+      "traits": {
+        "crowding": 0.82,
+        "saccadic": 0.55,
+        "contrast": 0.84,
+        "attention": 0.69
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_038",
+      "testId": "20260218_121021_028",
+      "createdAt": "2026-02-18T20:10:21.149849Z",
+      "traits": {
+        "crowding": 0.98,
+        "saccadic": 0.96,
+        "contrast": 0.14,
+        "attention": 0.19
+      },
+      "userType": "teen",
+      "gradeLevel": "8",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 3,
+      "significantFactors": [
+        "letterSpacing",
+        "lineHeight",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_039",
+      "testId": "20260218_121021_029",
+      "createdAt": "2026-02-18T20:10:21.294744Z",
+      "traits": {
+        "crowding": 0.69,
+        "saccadic": 0.21,
+        "contrast": 0.13,
+        "attention": 0.32
+      },
+      "userType": "teen",
+      "gradeLevel": "8",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_040",
+      "testId": "20260218_121021_030",
+      "createdAt": "2026-02-18T20:10:21.443843Z",
+      "traits": {
+        "crowding": 0.52,
+        "saccadic": 0.77,
+        "contrast": 0.15,
+        "attention": 0.58
+      },
+      "userType": "child",
+      "gradeLevel": "6",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_041",
+      "testId": "20260218_121021_031",
+      "createdAt": "2026-02-18T20:10:21.590854Z",
+      "traits": {
+        "crowding": 0.91,
+        "saccadic": 0.98,
+        "contrast": 0.21,
+        "attention": 0.67
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1920x1080",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_042",
+      "testId": "20260218_121021_032",
+      "createdAt": "2026-02-18T20:10:21.734975Z",
+      "traits": {
+        "crowding": 0.82,
+        "saccadic": 0.3,
+        "contrast": 0.58,
+        "attention": 0.69
+      },
+      "userType": "child",
+      "gradeLevel": "3",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_043",
+      "testId": "20260218_121021_033",
+      "createdAt": "2026-02-18T20:10:21.876887Z",
+      "traits": {
+        "crowding": 0.36,
+        "saccadic": 0.76,
+        "contrast": 0.33,
+        "attention": 0.43
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_044",
+      "testId": "20260218_121021_034",
+      "createdAt": "2026-02-18T20:10:22.019582Z",
+      "traits": {
+        "crowding": 0.55,
+        "saccadic": 0.07,
+        "contrast": 0.78,
+        "attention": 0.89
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "wordSpacing",
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_045",
+      "testId": "20260218_121022_035",
+      "createdAt": "2026-02-18T20:10:22.167939Z",
+      "traits": {
+        "crowding": 0.15,
+        "saccadic": 0.46,
+        "contrast": 0.16,
+        "attention": 0.86
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_046",
+      "testId": "20260218_121022_036",
+      "createdAt": "2026-02-18T20:10:22.311938Z",
+      "traits": {
+        "crowding": 0.05,
+        "saccadic": 0.17,
+        "contrast": 0.41,
+        "attention": 0.92
+      },
+      "userType": "child",
+      "gradeLevel": "6",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "fontSize",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_047",
+      "testId": "20260218_121022_037",
+      "createdAt": "2026-02-18T20:10:22.461908Z",
+      "traits": {
+        "crowding": 0.5,
+        "saccadic": 0.85,
+        "contrast": 0.31,
+        "attention": 0.56
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_048",
+      "testId": "20260218_121022_038",
+      "createdAt": "2026-02-18T20:10:22.602016Z",
+      "traits": {
+        "crowding": 0.1,
+        "saccadic": 0.09,
+        "contrast": 0.71,
+        "attention": 0.69
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "768x1024",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_049",
+      "testId": "20260218_121022_039",
+      "createdAt": "2026-02-18T20:10:22.748457Z",
+      "traits": {
+        "crowding": 0.11,
+        "saccadic": 0.17,
+        "contrast": 0.19,
+        "attention": 0.87
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 2,
+      "significantFactors": [
+        "fontSize",
+        "paragraphWidth"
+      ]
+    },
+    {
+      "botId": "BOT_050",
+      "testId": "20260218_121022_040",
+      "createdAt": "2026-02-18T20:10:22.893413Z",
+      "traits": {
+        "crowding": 0.65,
+        "saccadic": 0.51,
+        "contrast": 0.97,
+        "attention": 0.31
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "390x844",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "fontSize"
+      ]
+    },
+    {
+      "botId": "BOT_051",
+      "testId": "20260218_121022_041",
+      "createdAt": "2026-02-18T20:10:23.042199Z",
+      "traits": {
+        "crowding": 0.32,
+        "saccadic": 0.48,
+        "contrast": 0.01,
+        "attention": 0.09
+      },
+      "userType": "child",
+      "gradeLevel": "4",
+      "viewport": "2560x1440",
+      "status": "completed",
+      "fineTuneTriggered": true,
+      "significantFactorCount": 1,
+      "significantFactors": [
+        "lineHeight"
+      ]
+    },
+    {
+      "botId": "BOT_052",
+      "testId": "20260218_121023_042",
+      "createdAt": "2026-02-18T20:10:23.181381Z",
+      "traits": {
+        "crowding": 0.33,
+        "saccadic": 0.23,
+        "contrast": 0.63,
+        "attention": 0.13
+      },
+      "userType": "teen",
+      "gradeLevel": "8",
+      "viewport": "768x1024",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_053",
+      "testId": "20260218_121023_043",
+      "createdAt": "2026-02-18T20:10:23.326017Z",
+      "traits": {
+        "crowding": 0.02,
+        "saccadic": 0.21,
+        "contrast": 0.01,
+        "attention": 0.44
+      },
+      "userType": "child",
+      "gradeLevel": "4",
+      "viewport": "2560x1440",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_054",
+      "testId": "20260218_121023_044",
+      "createdAt": "2026-02-18T20:10:23.471339Z",
+      "traits": {
+        "crowding": 0.73,
+        "saccadic": 0.46,
+        "contrast": 0.22,
+        "attention": 0.27
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1366x768",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_055",
+      "testId": "20260218_121023_045",
+      "createdAt": "2026-02-18T20:10:23.620470Z",
+      "traits": {
+        "crowding": 0.66,
+        "saccadic": 0.79,
+        "contrast": 0.3,
+        "attention": 0.05
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "2560x1440",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_056",
+      "testId": "20260218_121023_046",
+      "createdAt": "2026-02-18T20:10:23.761237Z",
+      "traits": {
+        "crowding": 0.28,
+        "saccadic": 0.78,
+        "contrast": 0.69,
+        "attention": 0.44
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1920x1080",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_057",
+      "testId": "20260218_121023_047",
+      "createdAt": "2026-02-18T20:10:23.908837Z",
+      "traits": {
+        "crowding": 0.64,
+        "saccadic": 0.42,
+        "contrast": 0.55,
+        "attention": 0.83
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1920x1080",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_058",
+      "testId": "20260218_121023_048",
+      "createdAt": "2026-02-18T20:10:24.054750Z",
+      "traits": {
+        "crowding": 0.21,
+        "saccadic": 0.79,
+        "contrast": 0.44,
+        "attention": 1.0
+      },
+      "userType": "teen",
+      "gradeLevel": "8",
+      "viewport": "2560x1440",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_059",
+      "testId": "20260218_121024_049",
+      "createdAt": "2026-02-18T20:10:24.196833Z",
+      "traits": {
+        "crowding": 0.88,
+        "saccadic": 0.54,
+        "contrast": 0.74,
+        "attention": 0.36
+      },
+      "userType": "adult",
+      "gradeLevel": "none",
+      "viewport": "1920x1080",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    },
+    {
+      "botId": "BOT_060",
+      "testId": "20260218_121024_050",
+      "createdAt": "2026-02-18T20:10:24.343635Z",
+      "traits": {
+        "crowding": 0.43,
+        "saccadic": 0.73,
+        "contrast": 0.59,
+        "attention": 0.88
+      },
+      "userType": "teen",
+      "gradeLevel": "10",
+      "viewport": "1920x1080",
+      "status": "running",
+      "fineTuneTriggered": null,
+      "significantFactorCount": 0,
+      "significantFactors": []
+    }
+  ],
+  "totalRuns": 60,
+  "lastUpdated": "2026-02-18T20:29:59.353302Z"
+}
