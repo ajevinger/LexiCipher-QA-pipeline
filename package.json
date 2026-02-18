@@ -1,0 +1,14 @@
+{
+  "name": "lexicipher-qa-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deterministic automated testing pipeline for LexiCipher.org dyslexia font optimization",
+  "main": "bot.js",
+  "scripts": {
+    "test": "node bot.js",
+    "test:local": "node bot.js"
+  },
+  "dependencies": {
+    "playwright": "1.52.0"
+  }
+}

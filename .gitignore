@@ -1,0 +1,9 @@
+node_modules/
+test_reports/
+*.png
+.env
+package-lock.json
+
+# bot_data.db is intentionally tracked (single-file SQLite backup)
+# To exclude it, uncomment the line below:
+# bot_data.db

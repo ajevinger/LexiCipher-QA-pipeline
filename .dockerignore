@@ -1,0 +1,8 @@
+test_reports/
+node_modules/
+.git/
+.gitignore
+.dockerignore
+dashboard.html
+bot_registry.json
+README.md
