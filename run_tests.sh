@@ -40,15 +40,13 @@ USER_TYPES=("child" "teen" "adult")
 # HELPER FUNCTIONS
 # ==============================================================================
 
-# Generate four random floats between 0.00 and 1.00 in a single awk call.
-# Returns them space-separated: "0.42 0.87 0.13 0.65"
-# Using a single awk invocation avoids same-nanosecond seed collisions that
-# occur when rand_float() is called four times in rapid succession.
+# Generate four random floats between 0.00 and 1.00 using Python.
+# Python's random module seeds from os.urandom() by default — each call
+# produces unique values even when invoked multiple times per second,
+# avoiding the awk seed-collision bug on systems where date +%s%N is
+# unavailable (e.g. macOS, Git Bash on Windows).
 rand_four_floats() {
-  awk "BEGIN{
-    srand($(date +%s%N 2>/dev/null || date +%s)$(( RANDOM * RANDOM )));
-    printf \"%.2f %.2f %.2f %.2f\", rand(), rand(), rand(), rand()
-  }"
+  python3 -c "import random; print(' '.join(f'{random.random():.2f}' for _ in range(4)))"
 }
 
 # Get the next BOT_ID from registry
@@ -121,36 +119,58 @@ with open('$REGISTRY', 'w') as f:
 "
 }
 
-# Update bot status after run completes
+# Update bot status after run completes.
+# Uses an exclusive file lock so parallel bots don't corrupt the registry JSON.
 update_bot_status() {
   local bot_id="$1" status="$2" test_id="$3"
 
   python3 -c "
-import json, os
+import json, os, sys
 from datetime import datetime
 
-with open('$REGISTRY') as f:
-    data = json.load(f)
+# Use fcntl on Linux/macOS; fall back to a .lock file on Windows
+try:
+    import fcntl
+    def lock_file(f): fcntl.flock(f, fcntl.LOCK_EX)
+    def unlock_file(f): fcntl.flock(f, fcntl.LOCK_UN)
+except ImportError:
+    import msvcrt, time
+    def lock_file(f):
+        for _ in range(30):
+            try: msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1); return
+            except OSError: time.sleep(0.1)
+    def unlock_file(f):
+        try: msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+        except OSError: pass
 
-# Find the bot and update
-for bot in data['bots']:
-    if bot['botId'] == '$bot_id':
-        bot['status'] = '$status'
+registry_path = '$REGISTRY'
+lock_path = registry_path + '.lock'
 
-        # Try to read vote log for diagnostic data
-        vote_file = os.path.join('$REPORT_DIR', 'votes_$test_id.json')
-        if os.path.exists(vote_file):
-            with open(vote_file) as vf:
-                votes = json.load(vf)
-            bot['fineTuneTriggered'] = votes.get('fineTuneTriggered', False)
-            bot['significantFactorCount'] = votes.get('significantFactorCount', 0)
-            bot['significantFactors'] = votes.get('significantFactors', [])
-        break
+# Acquire exclusive lock via a separate lock file
+with open(lock_path, 'w') as lf:
+    lock_file(lf)
+    try:
+        with open(registry_path) as f:
+            data = json.load(f)
 
-data['lastUpdated'] = datetime.utcnow().isoformat() + 'Z'
+        for bot in data['bots']:
+            if bot['botId'] == '$bot_id':
+                bot['status'] = '$status'
+                vote_file = os.path.join('$REPORT_DIR', 'votes_$test_id.json')
+                if os.path.exists(vote_file):
+                    with open(vote_file) as vf:
+                        votes = json.load(vf)
+                    bot['fineTuneTriggered'] = votes.get('fineTuneTriggered', False)
+                    bot['significantFactorCount'] = votes.get('significantFactorCount', 0)
+                    bot['significantFactors'] = votes.get('significantFactors', [])
+                break
 
-with open('$REGISTRY', 'w') as f:
-    json.dump(data, f, indent=2)
+        data['lastUpdated'] = datetime.utcnow().isoformat() + 'Z'
+
+        with open(registry_path, 'w') as f:
+            json.dump(data, f, indent=2)
+    finally:
+        unlock_file(lf)
 "
 }
 
