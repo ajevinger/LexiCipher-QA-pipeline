@@ -47,16 +47,18 @@ describe('calculatePenalty', () => {
     const traits = { crowding: 1.0, saccadic: 1.0, contrast: 1.0 };
     const penalty = calculatePenalty(ALL_HIGH, traits);
     // All +1 direction factors reduce penalty; bwgt direction=-1 increases it
-    // Net: -(1*15*1*1) -(1*12*1*1) -(1*18*1*1) -(1*10*1*1) -(1*14*1*1) -(1*16*1*1) -(1*8*1*-1)
-    //    = -15 -12 -18 -10 -14 -16 +8 = -77
-    expect(penalty).toBe(-77);
+    // Net: -(1*15*1*1) -(1*12*1*1) -(1*18*1*1) -(1*10*1*1) -(1*14*1*1) -(1*16*1*1) -(1*14*1*-1)
+    //    = -15 -12 -18 -10 -14 -16 +14 = -71
+    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
+    expect(penalty).toBe(-71);
   });
 
   test('all factors LOW with high-crowding bot → large positive penalty (harder to read)', () => {
     const traits = { crowding: 1.0, saccadic: 1.0, contrast: 1.0 };
     const penalty = calculatePenalty(ALL_LOW, traits);
-    // All -1 levels flip the signs: +15 +12 +18 +10 +14 +16 -8 = +77
-    expect(penalty).toBe(77);
+    // All -1 levels flip the signs: +15 +12 +18 +10 +14 +16 -14 = +71
+    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
+    expect(penalty).toBe(71);
   });
 
   test('zero traits → penalty is always 0 regardless of factor levels', () => {
@@ -68,12 +70,13 @@ describe('calculatePenalty', () => {
   test('bwgt direction is negative — high bwgt INCREASES penalty for crowding-sensitive bot', () => {
     const traits = { crowding: 1.0, saccadic: 0, contrast: 0 };
     // Only crowding factors matter: letterSpacing(+1), wordSpacing(+1), bwgt(-1)
-    // All HIGH: -(1*15*1*1) -(1*12*1*1) -(1*8*1*-1) = -15 -12 +8 = -19
+    // All HIGH: -(1*15*1*1) -(1*12*1*1) -(1*14*1*-1) = -15 -12 +14 = -13
+    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
     const penaltyHigh = calculatePenalty(ALL_HIGH, traits);
-    // All LOW: -(-1*15*1*1) -(-1*12*1*1) -(-1*8*1*-1) = +15 +12 -8 = +19
+    // All LOW: -(-1*15*1*1) -(-1*12*1*1) -(-1*14*1*-1) = +15 +12 -14 = +13
     const penaltyLow = calculatePenalty(ALL_LOW, traits);
-    expect(penaltyHigh).toBe(-19);
-    expect(penaltyLow).toBe(19);
+    expect(penaltyHigh).toBe(-13);
+    expect(penaltyLow).toBe(13);
   });
 
   test('only saccadic factors matter when crowding=0 and contrast=0', () => {
@@ -280,9 +283,10 @@ describe('Full DOE vote pipeline integration', () => {
     const factorLevels = { letterSpacing: 1, wordSpacing: 1, bwgt: -1 }; // all crowding factors at best
     const penalty = calculatePenalty(factorLevels, traits);
     const ref = calculateReferencePenalty();
-    // penalty = -(1*15*1*1) -(1*12*1*1) -(-1*8*1*-1) = -15 -12 -8 = -35
-    expect(penalty).toBe(-35);
-    // With no noise (attention=1), diff = -35 - 0 = -35 < -3 → Better
+    // penalty = -(1*15*1*1) -(1*12*1*1) -(-1*14*1*-1) = -15 -12 -14 = -41
+    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
+    expect(penalty).toBe(-41);
+    // With no noise (attention=1), diff = -41 - 0 = -41 < -3 → Better
     const vote = decideVote(penalty, ref, 1.0);
     expect(vote).toBe(1);
   });
@@ -292,8 +296,9 @@ describe('Full DOE vote pipeline integration', () => {
     const factorLevels = { letterSpacing: -1, wordSpacing: -1, bwgt: 1 }; // all crowding factors at worst
     const penalty = calculatePenalty(factorLevels, traits);
     const ref = calculateReferencePenalty();
-    // penalty = -(-1*15*1*1) -(-1*12*1*1) -(1*8*1*-1) = +15 +12 +8 = +35
-    expect(penalty).toBe(35);
+    // penalty = -(-1*15*1*1) -(-1*12*1*1) -(1*14*1*-1) = +15 +12 +14 = +41
+    // (bwgt weight raised from 8→14 on feature/bwgt-isolation-test branch)
+    expect(penalty).toBe(41);
     const vote = decideVote(penalty, ref, 1.0);
     expect(vote).toBe(-1);
   });

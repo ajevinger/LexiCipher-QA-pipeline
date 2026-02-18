@@ -23,7 +23,9 @@ const PENALTY_WEIGHTS = {
   fontWeight:     10,  // Contrast axis — heavier weight helps contrast-sensitive readers
   fontSize:       14,  // Contrast axis — larger size helps
   paragraphWidth: 16,  // Saccadic axis — narrower (40ch at +1) helps saccadic
-  bwgt:            8,  // Crowding axis (negative direction — high BWGT = harder)
+  bwgt:           14,  // Crowding axis (negative direction — high BWGT = harder)
+                       // Raised from 8→14 for bwgt-isolation-test branch (feature/bwgt-isolation-test)
+                       // to give bwgt the same weight as fontSize and test detectability.
 };
 
 /**

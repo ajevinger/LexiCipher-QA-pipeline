@@ -387,6 +387,85 @@ if [ "${1:-}" = "--replay" ]; then
 fi
 
 # ==============================================================================
+# BWGT ISOLATION TEST MODE
+# Runs 10 bots with high contrast + near-zero crowding/saccadic to isolate
+# whether the bwgt factor can be detected when other factors are suppressed.
+# ==============================================================================
+
+if [ "${1:-}" = "--bwgt-test" ]; then
+  NUM_BWGT_BOTS="${2:-10}"
+  echo "============================================"
+  echo "  bwgt Isolation Test"
+  echo "  Bots:     ${NUM_BWGT_BOTS}"
+  echo "  Profile:  V_CROWDING=0.01-0.10  V_SACCADIC=0.01-0.10"
+  echo "            V_CONTRAST=0.90-0.99  V_ATTENTION=0.95"
+  echo "  Purpose:  Detect bwgt significance with other factors suppressed"
+  echo "============================================"
+
+  docker build -t "${IMAGE_NAME}" .
+
+  mkdir -p "${REPORT_DIR}"
+  if [ ! -f "${SUMMARY_CSV}" ]; then
+    echo "run,bot_id,test_id,user_type,viewport,v_crowding,v_saccadic,v_contrast,v_attention,exit_code,duration_s" > "${SUMMARY_CSV}"
+  fi
+  init_registry
+
+  declare -a BWGT_CONFIGS=()
+
+  for i in $(seq 1 "${NUM_BWGT_BOTS}"); do
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    TEST_ID="${TIMESTAMP}_bwgt$(printf '%03d' $i)"
+    BOT_ID=$(next_bot_id)
+
+    # Fixed viewport: 1920x1080 (desktop — most neutral for bwgt)
+    VP_W=1920; VP_H=1080; VP="1920x1080"
+
+    # Fixed user type: adult (no grade-level noise)
+    UT="adult"; GL="none"
+
+    # Controlled traits: high contrast, near-zero crowding/saccadic, high attention
+    V_CR=$(python3 -c "import random; print(f'{random.uniform(0.01,0.10):.2f}')")
+    V_SA=$(python3 -c "import random; print(f'{random.uniform(0.01,0.10):.2f}')")
+    V_CO=$(python3 -c "import random; print(f'{random.uniform(0.90,0.99):.2f}')")
+    V_AT="0.95"
+
+    register_bot "${BOT_ID}" "${TEST_ID}" "${UT}" "${GL}" "${VP}" "${V_CR}" "${V_SA}" "${V_CO}" "${V_AT}"
+    BWGT_CONFIGS+=("${i}|${BOT_ID}|${TEST_ID}|${VP_W}|${VP_H}|${UT}|${GL}|${V_CR}|${V_SA}|${V_CO}|${V_AT}")
+    echo "[QUEUED] ${BOT_ID} | CR=${V_CR} SA=${V_SA} CO=${V_CO} AT=${V_AT}"
+  done
+
+  echo ""
+  echo "[START] Launching ${NUM_BWGT_BOTS} bwgt-isolation bots in parallel..."
+
+  active_jobs=0
+  for config in "${BWGT_CONFIGS[@]}"; do
+    IFS='|' read -r i BOT_ID TEST_ID VP_W VP_H UT GL V_CR V_SA V_CO V_AT <<< "${config}"
+    (
+      run_bot_with_retry "${i}" "${BOT_ID}" "${TEST_ID}" \
+        "${VP_W}" "${VP_H}" "${UT}" "${GL}" \
+        "${V_CR}" "${V_SA}" "${V_CO}" "${V_AT}"
+    ) &
+    active_jobs=$(( active_jobs + 1 ))
+    if [ "${active_jobs}" -ge "${MAX_PARALLEL}" ]; then
+      wait -n 2>/dev/null || wait
+      active_jobs=$(( active_jobs - 1 ))
+    fi
+  done
+  wait
+
+  generate_dashboard_data
+
+  echo ""
+  echo "========================================="
+  echo "  bwgt ISOLATION TEST COMPLETE"
+  echo "  Check results with:"
+  echo "    python3 analyze.py --factors"
+  echo "    python3 analyze.py --query \"SELECT bot_id, significant_factors FROM bots WHERE test_id LIKE '%_bwgt%'\""
+  echo "========================================="
+  exit 0
+fi
+
+# ==============================================================================
 # PARALLEL MODE
 # ==============================================================================
 
