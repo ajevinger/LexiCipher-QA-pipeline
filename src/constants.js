@@ -23,7 +23,9 @@ const PENALTY_WEIGHTS = {
   fontWeight:     10,  // Contrast axis — heavier weight helps contrast-sensitive readers
   fontSize:       14,  // Contrast axis — larger size helps
   paragraphWidth: 16,  // Saccadic axis — narrower (40ch at +1) helps saccadic
-  bwgt:            8,  // Crowding axis (negative direction — high BWGT = harder)
+  bwgt:           14,  // Crowding axis (negative direction — high BWGT = harder)
+                       // Raised from 8→14 for bwgt-isolation-test branch (feature/bwgt-isolation-test)
+                       // to give bwgt the same weight as fontSize and test detectability.
 };
 
 /**
@@ -36,7 +38,10 @@ const FACTOR_TRAIT_MAP = {
   fontWeight:     { trait: 'contrast',  direction: +1 },
   fontSize:       { trait: 'contrast',  direction: +1 },
   paragraphWidth: { trait: 'saccadic',  direction: +1 },
-  bwgt:           { trait: 'crowding',  direction: -1 },  // High BWGT = MORE visual weight = harder
+  bwgt:           { trait: 'contrast',  direction: -1 },  // High BWGT = heavier strokes = LESS contrast = harder
+                                                           // Remapped from crowding→contrast (feature/bwgt-isolation-test):
+                                                           // isolation test proved bwgt is imperceptible on crowding-dominant
+                                                           // bots; stroke weight is a contrast-axis effect, not crowding.
 };
 
 module.exports = { VOTE_THRESHOLD, PENALTY_WEIGHTS, FACTOR_TRAIT_MAP };
