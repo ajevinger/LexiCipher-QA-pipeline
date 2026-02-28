@@ -139,39 +139,19 @@ test.describe('LexiCipher Screening Phase — Regression Baseline', () => {
       }
     }
 
-    // ── STEP 7: Post-screening — Fine-Tune or View Results ────────────────
-    // With a zero-trait bot, no factors will be significant → "View Results"
+    // ── STEP 7: Post-screening — assert "View Results" only (no Fine-Tune) ──
+    // With a zero-trait bot all effects = 0 → no factor is significant →
+    // Fine-Tune Settings must NOT appear; only View Results should be offered.
     await page.waitForTimeout(3000); // Allow DOE calculation to complete
 
     const fineTuneBtn    = page.getByRole('button', { name: /Fine-Tune Settings/i });
     const viewResultsBtn = page.getByRole('button', { name: /View Results/i });
-    const skipResultsBtn = page.getByRole('button', { name: /Skip to Results/i });
 
-    const fineTuneVisible    = await isVisible(fineTuneBtn, 8000);
-    const viewResultsVisible = await isVisible(viewResultsBtn, 3000);
-    const skipResultsVisible = await isVisible(skipResultsBtn, 3000);
+    // Zero-trait bot must never trigger Fine-Tune
+    expect(await isVisible(fineTuneBtn, 3000)).toBe(false);
 
-    // At least one post-screening action must be available
-    expect(fineTuneVisible || viewResultsVisible || skipResultsVisible).toBe(true);
-
-    if (fineTuneVisible) {
-      await fineTuneBtn.click();
-      // Complete one optimization round then navigate to results
-      const worseBtn = page.getByRole('button', { name: /Worse/i });
-      if (await isVisible(worseBtn, 10000)) {
-        await page.getByRole('button', { name: /Same/i }).click();
-        await page.waitForTimeout(2000);
-      }
-      // Try to reach results
-      const resultsBtn = page.getByRole('button', { name: /View Results|Skip to Results/i });
-      if (await isVisible(resultsBtn, 5000)) {
-        await resultsBtn.click();
-      }
-    } else if (viewResultsVisible) {
-      await viewResultsBtn.click();
-    } else {
-      await skipResultsBtn.click();
-    }
+    await expect(viewResultsBtn).toBeVisible({ timeout: 10000 });
+    await viewResultsBtn.click();
 
     // ── STEP 8: Results Page ──────────────────────────────────────────────
     await expect(
