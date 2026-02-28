@@ -17,7 +17,7 @@
 
 const { test, expect } = require('@playwright/test');
 
-const SITE_URL = process.env.SITE_URL || 'https://lexi-cipher-org-cyan.vercel.app/';
+const SITE_URL = process.env.SITE_URL || 'https://lexi-cipher-org-git-dev-lexisolve-admins-projects.vercel.app/';
 const EXPECTED_DOE_RUNS = 16;
 
 // ---------------------------------------------------------------------------
