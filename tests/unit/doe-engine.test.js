@@ -118,6 +118,32 @@ describe('calculatePenalty', () => {
     const penaltyLow  = calculatePenalty(ALL_LOW, traits);
     expect(penaltyHigh).toBeCloseTo(-penaltyLow);
   });
+
+  // ── Edge cases ──────────────────────────────────────────────────────────
+
+  test('NaN trait value propagates as NaN (documents no clamping on input)', () => {
+    // The engine uses ?? 0 only for missing keys; a NaN value passes through.
+    // This pins the current behavior — update if clamping is ever added.
+    const traits = { crowding: NaN, saccadic: 0, contrast: 0 };
+    const penalty = calculatePenalty({ letterSpacing: 1 }, traits);
+    expect(isNaN(penalty)).toBe(true);
+  });
+
+  test('trait value > 1.0 scales penalty linearly (no upper clamping)', () => {
+    // Verifies the engine does not clamp [0, 1] — caller is responsible for valid input.
+    const traits = { crowding: 2.0, saccadic: 0, contrast: 0 };
+    // letterSpacing: -(1 * 15 * 2.0 * 1) = -30
+    const penalty = calculatePenalty({ letterSpacing: 1 }, traits);
+    expect(penalty).toBeCloseTo(-30);
+  });
+
+  test('negative trait value inverts the penalty sign for that axis', () => {
+    // Pins the math for future refactors; negative traits are not a valid use case.
+    const traits = { crowding: -0.5, saccadic: 0, contrast: 0 };
+    // letterSpacing: -(1 * 15 * (-0.5) * 1) = +7.5
+    const penalty = calculatePenalty({ letterSpacing: 1 }, traits);
+    expect(penalty).toBeCloseTo(7.5);
+  });
 });
 
 // ============================================================
@@ -234,6 +260,23 @@ describe('hashDoeMatrix', () => {
     const hash1 = hashDoeMatrix(SAMPLE_MATRIX);
     const hash2 = hashDoeMatrix(reversed);
     expect(hash1).not.toBe(hash2);
+  });
+
+  // ── Malformed input edge cases ───────────────────────────────────────────
+
+  test('array of empty objects → returns a 12-char hex string (no crash)', () => {
+    // hashDoeMatrix reads Object.keys(doeMatrix[0] || {}).sort() — an empty
+    // object gives an empty key list, so JSON.stringify still produces a valid
+    // string and the SHA-256 hash succeeds.
+    const hash = hashDoeMatrix([{}]);
+    expect(hash).toMatch(/^[0-9a-f]{12}$/);
+  });
+
+  test('matrix rows missing the "parameters" key → returns a 12-char hex string (no crash)', () => {
+    // The hash function serializes the whole matrix, not just parameters,
+    // so a missing key is just treated as undefined in JSON (omitted).
+    const hash = hashDoeMatrix([{ runNumber: 1 }]);
+    expect(hash).toMatch(/^[0-9a-f]{12}$/);
   });
 });
 

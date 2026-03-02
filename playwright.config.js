@@ -11,7 +11,7 @@ module.exports = defineConfig({
   retries: 0,
   reporter: [['list'], ['html', { outputFolder: 'test_reports/playwright', open: 'never' }]],
   use: {
-    baseURL: process.env.SITE_URL || 'https://lexi-cipher-org-cyan.vercel.app/',
+    baseURL: process.env.SITE_URL || 'https://lexi-cipher-org-git-dev-lexisolve-admins-projects.vercel.app/',
     headless: true,
     viewport: { width: 1280, height: 800 },
     actionTimeout: 20_000,
@@ -23,6 +23,10 @@ module.exports = defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
 });
